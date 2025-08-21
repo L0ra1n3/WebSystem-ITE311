@@ -39,7 +39,7 @@
       color: var(--primary);
     }
 
-    /* highlight underline */
+    
     .highlight-bar {
       position: absolute;
       bottom: 0;
@@ -54,24 +54,24 @@
 
 <nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
-    <!-- Brand -->
+    
     <a class="navbar-brand" href="#">Navigation Sample</a>
 
-    <!-- Toggler (for mobile) -->
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
             aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Links -->
+    <!-- for mobile -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto position-relative">
         <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-        <!-- put highlight bar inside ul -->
+        
         <div class="highlight-bar"></div>
       </ul>
     </div>
@@ -89,7 +89,7 @@
     highlight.style.left = (rect.left - navRect.left) + "px";
   }
 
-  // Initial position (Home)
+  
   window.addEventListener("load", () => {
     const activeLink = document.querySelector(".nav-link.active");
     if (activeLink) moveHighlight(activeLink);

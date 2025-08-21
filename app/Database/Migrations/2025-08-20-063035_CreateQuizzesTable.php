@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Database\Migrations;
+
+use CodeIgniter\Database\Migration;
+
+class CreateQuizzesTable extends Migration
+{
+    public function up()
+    {
+         $this->forge->addField([
+            'id' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+                'auto_increment' => true,
+            ],
+            'lesson_id' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'unsigned'   => true,
+            ],
+            'title' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '150',
+            ],
+            'description' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
+            'total_points' => [
+                'type'       => 'INT',
+                'constraint' => 4,
+                'default'    => 0,
+            ],
+            'time_limit' => [
+                'type'       => 'INT',
+                'constraint' => 4,
+                'null'       => true, // in minutes (optional)
+            ],
+            'created_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'updated_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'deleted_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+        ]);
+
+        // Primary key
+        $this->forge->addKey('id', true);
+
+        // Foreign key → lesson_id references lessons.id
+        $this->forge->addForeignKey('lesson_id', 'lessons', 'id', 'CASCADE', 'CASCADE');
+
+        // Create table
+        $this->forge->createTable('quizzes');
+    }
+
+    public function down()
+    {
+        $this->forge->dropTable('quizzes');
+    }
+}
