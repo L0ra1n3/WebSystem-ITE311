@@ -55,7 +55,7 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
     
-    <a class="navbar-brand" href="#">Navigation Sample</a>
+    <a class="navbar-brand" href="#">LMS</a>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
@@ -67,10 +67,9 @@
     <!-- for mobile -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto position-relative">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        <li class="nav-item"><a class="nav-link active" href=<?= base_url('index') ?>>Home</a></li>
+        <li class="nav-item"><a class="nav-link" href=<?= base_url('about') ?>>About</a></li>
+        <li class="nav-item"><a class="nav-link" href=<?= base_url('contact')?>>Contact</a></li>
         
         <div class="highlight-bar"></div>
       </ul>
@@ -82,28 +81,28 @@
   const links = document.querySelectorAll('.nav-link');
   const highlight = document.querySelector('.highlight-bar');
 
-  function moveHighlight(link) {
-    const rect = link.getBoundingClientRect();
-    const navRect = link.closest('.navbar-nav').getBoundingClientRect();
-    highlight.style.width = rect.width + "px";
-    highlight.style.left = (rect.left - navRect.left) + "px";
-  }
+//   function moveHighlight(link) {
+//     const rect = link.getBoundingClientRect();
+//     const navRect = link.closest('.navbar-nav').getBoundingClientRect();
+//     highlight.style.width = rect.width + "px";
+//     highlight.style.left = (rect.left - navRect.left) + "px";
+//   }
 
   
-  window.addEventListener("load", () => {
-    const activeLink = document.querySelector(".nav-link.active");
-    if (activeLink) moveHighlight(activeLink);
-  });
+//   window.addEventListener("load", () => {
+//     const activeLink = document.querySelector(".nav-link.active");
+//     if (activeLink) moveHighlight(activeLink);
+//   });
 
-  links.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      links.forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
-      moveHighlight(this);
-    });
-  });
-</script>
+//   links.forEach(link => {
+//     link.addEventListener('click', function(e) {
+//       e.preventDefault();
+//       links.forEach(l => l.classList.remove('active'));
+//       this.classList.add('active');
+//       moveHighlight(this);
+//     });
+//   });
+// </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
