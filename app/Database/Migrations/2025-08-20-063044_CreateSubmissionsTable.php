@@ -30,7 +30,7 @@ class CreateSubmissionsTable extends Migration
                 'constraint' => 5,
                 'default'    => 0,
             ],
-            'submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP', // ✅ Fix here
+            'submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP', 
             'status' => [
                 'type'       => 'ENUM',
                 'constraint' => ['in_progress', 'submitted', 'graded'],
@@ -50,14 +50,13 @@ class CreateSubmissionsTable extends Migration
             ],
         ]);
 
-        // Primary Key
         $this->forge->addKey('id', true);
 
-        // Foreign Keys
+
         $this->forge->addForeignKey('quiz_id', 'quizzes', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
 
-        // Create Table
+        
         $this->forge->createTable('submissions');
     }
 

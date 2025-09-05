@@ -47,13 +47,12 @@ class CreateLessonsTable extends Migration
             ],
         ]);
 
-        // Primary key
         $this->forge->addKey('id', true);
 
-        // Foreign key → course_id references courses.id
+        
         $this->forge->addForeignKey('course_id', 'courses', 'id', 'CASCADE', 'CASCADE');
 
-        // Create table
+       
         $this->forge->createTable('lessons');
     }
 

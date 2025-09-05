@@ -36,7 +36,7 @@ class CreateQuizzesTable extends Migration
             'time_limit' => [
                 'type'       => 'INT',
                 'constraint' => 4,
-                'null'       => true, // in minutes (optional)
+                'null'       => true, 
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -52,13 +52,13 @@ class CreateQuizzesTable extends Migration
             ],
         ]);
 
-        // Primary key
+       
         $this->forge->addKey('id', true);
 
-        // Foreign key → lesson_id references lessons.id
+        
         $this->forge->addForeignKey('lesson_id', 'lessons', 'id', 'CASCADE', 'CASCADE');
 
-        // Create table
+       
         $this->forge->createTable('quizzes');
     }
 

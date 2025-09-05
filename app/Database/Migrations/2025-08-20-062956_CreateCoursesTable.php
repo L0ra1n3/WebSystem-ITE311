@@ -47,10 +47,10 @@ class CreateCoursesTable extends Migration
             ],
         ]);
 
-        // Primary key
+       
         $this->forge->addKey('id', true);
 
-        // Create table
+       
         $this->forge->createTable('courses');
     }
 

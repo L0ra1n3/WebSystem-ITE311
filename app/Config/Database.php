@@ -28,7 +28,7 @@ class Database extends Config
         'DSN'          => '',
         'hostname'     => 'localhost',
         'username'     => 'root',
-        'password'     => 'miiaamiix',
+        'password'     => '',
         'database'     => 'lms_esyong',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
