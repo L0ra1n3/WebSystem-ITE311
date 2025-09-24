@@ -9,7 +9,7 @@
       <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
     <?php endif; ?>
 
-    <form method="post" action="<?= base_url('register/store') ?>">
+    <form method="post" action="<?= base_url('register') ?>">
       <?= csrf_field() ?>
 
 <div class="mb-3">
@@ -28,15 +28,15 @@
         <input type="password" name="password" class="form-control" required>
       </div>
 
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="role" class="form-label">Role</label>
         <select name="role" class="form-control">
-          <option value="student">Student</option>
-          <option value="instructor">Instructor</option>
-          <option value="admin">Admin</option>
+          <option value="student">student</option>
+          <option value="instructor">teacher</option>
+          <option value="admin">admin</option>
           <option value="user">User</option>
         </select>
-      </div>
+      </div> -->
 
       <button type="submit" class="btn btn-success">Register</button>
     </form>
