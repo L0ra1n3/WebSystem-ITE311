@@ -15,6 +15,7 @@ class StudentController extends BaseController
         $data['enrollments'] = ['Math 101', 'English 101', 'PE 101'];
 
         // 3. Load the dashboard view
-        return view('dashboards/student_dashboard', $data);
+        return view('dashboard/student', $data);
+
     }
 }
