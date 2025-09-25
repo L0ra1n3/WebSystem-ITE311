@@ -6,12 +6,12 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view( 'index');   // loads app/Views/index.php
+        return view( 'index');   
     }
 
     public function about(): string
     {
-        return view('about');   // loads app/Views/about.php
+        return view('about');   
     }
 
     public function contact(): string

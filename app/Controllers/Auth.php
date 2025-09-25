@@ -6,15 +6,15 @@ use App\Models\UserModel;
 
 class Auth extends BaseController
 {
-    // Login
+   
     public function login()
     {
-        // If user is already logged in, go straight to dashboard
+       
         if (session()->get('logged_in')) {
             return redirect()->to('dashboard');
         }
 
-        // Process login on POST
+       
         if ($this->request->getMethod() === 'POST') {
             $userModel = new UserModel();
             $email = $this->request->getPost('email');
@@ -30,17 +30,17 @@ class Auth extends BaseController
                     'logged_in' => true
                 ]);
 
-                return redirect()->to('/dashboard'); // Go to dashboard method
+                return redirect()->to('/dashboard'); 
             }
 
             return redirect()->back()->with('error', 'Invalid email or password');
         }
 
-        // Show login form on GET
+       
         return view('auth/login');
     }
 
-    // Register (default role = student)
+    
     public function register()
     {
         if ($this->request->getMethod() === 'GET') {
@@ -57,7 +57,7 @@ class Auth extends BaseController
                 'role'     => 'student' // force default role
             ];
 
-            // Try saving
+            
             if ($userModel->save($data)) {
                 $userId = $userModel->getInsertID();
 
@@ -70,20 +70,20 @@ class Auth extends BaseController
 
                 return redirect()->to('/dashboard')->with('success', 'Registration successful. You are now logged in.');
             } else {
-                // Show DB/validation errors
+                
                 return redirect()->back()->with('error', 'Registration failed. ' . implode(', ', $userModel->errors()));
             }
         }
     }
 
-    // Logout
+   
     public function logout()
     {
         session()->destroy();
         return redirect()->to('login');
     }
 
-    // Dashboard with role-based redirect
+    
     public function dashboard()
     {
         if (!session()->get('logged_in')) {
@@ -91,7 +91,6 @@ class Auth extends BaseController
         }
 
         $role = session()->get('role');
-
         if ($role === 'admin') {
             return redirect()->to('/admin/dashboard');
         } elseif ($role === 'teacher') {
@@ -100,7 +99,7 @@ class Auth extends BaseController
             return redirect()->to('/student/dashboard');
         }
 
-        // Fallback
+       
         return redirect()->to('dashboard');
     }
 }

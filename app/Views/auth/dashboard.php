@@ -1,10 +1,15 @@
-<?= $this->extend('template') ?>
-<?= $this->section('content') ?>
+<?php if($role == 'admin'): ?>
+    <h1>Welcome Admin!</h1>
+    <a href="/admin/users">Manage Users</a>
+    <a href="/admin/reports">View Reports</a>
 
-<div class="text-center">
-  <h1 class="text-success">Welcome, <?= session()->get('name') ?>!</h1>
-  <p>You are logged in as <b><?= session()->get('role') ?></b></p>
-  <a href="<?= base_url('logout') ?>" class="btn btn-danger">Logout</a>
-</div>
+<?php elseif($role == 'teacher'): ?>
+    <h1>Welcome Teacher!</h1>
+    <a href="/teacher/classes">My Classes</a>
+    <a href="/teacher/grades">Grade Students</a>
 
-<?= $this->endSection() ?>
+<?php else: ?>
+    <h1>Welcome Student!</h1>
+    <a href="/student/courses">My Courses</a>
+    <a href="/student/assignments">Assignments</a>
+<?php endif; ?>
