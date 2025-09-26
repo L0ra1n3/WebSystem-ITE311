@@ -48,15 +48,12 @@ class CreateUsersTable extends Migration
             ],
         ]);
 
-        
         $this->forge->addKey('id', true);
-
-        
         $this->forge->createTable('users');
     }
 
     public function down()
     {
-         $this->forge->dropTable('users');
+        $this->forge->dropTable('users');
     }
 }

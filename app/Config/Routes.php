@@ -18,11 +18,5 @@ $routes->post('register', 'Auth::register');  // ✅ fixed
 $routes->get('logout', 'Auth::logout');
 
 
-$routes->get('dashboard', 'Auth::dashboard');
+$routes->get('/dashboard', 'Auth::dashboard');
 
-// Role-specific dashboards
-$routes->get('admin/dashboard', 'AdminController::index');
-$routes->get('user/dashboard', 'UserController::index');
-$routes->get('student/dashboard', 'StudentController::index');
-$routes->get('teacher/dashboard', 'TeacherController::dashboard');
-$routes->get('staff/dashboard', 'StaffController::dashboard'); 
