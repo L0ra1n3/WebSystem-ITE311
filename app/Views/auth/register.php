@@ -9,14 +9,13 @@
       <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
     <?php endif; ?>
 
-    <form method="post" action="<?= base_url('register') ?>">
+    <form method="post" action="<?= base_url('register') ?>" onsubmit="return validatePassword()">
       <?= csrf_field() ?>
 
-<div class="mb-3">
-  <label for="username">Username</label>
-  <input type="text" name="username" class="form-control" required>
-</div>
-
+      <div class="mb-3">
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" required>
+      </div>
 
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
@@ -25,22 +24,30 @@
 
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" required>
+        <input type="password" id="password" name="password" class="form-control" required>
       </div>
 
-      <!-- <div class="mb-3">
-        <label for="role" class="form-label">Role</label>
-        <select name="role" class="form-control">
-          <option value="student">student</option>
-          <option value="instructor">teacher</option>
-          <option value="admin">admin</option>
-          <option value="user">User</option>
-        </select>
-      </div> -->
+      <div class="mb-3">
+        <label for="confirm_password" class="form-label">Confirm Password</label>
+        <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+      </div>
 
       <button type="submit" class="btn btn-success">Register</button>
     </form>
   </div>
 </div>
+
+<script>
+  function validatePassword() {
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm_password").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match. Please try again.");
+      return false;
+    }
+    return true;
+  }
+</script>
 
 <?= $this->endSection() ?>

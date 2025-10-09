@@ -2,7 +2,7 @@
 
 <div class="container mt-5">
     <div class="card shadow-sm p-4">
-        <h2 class="mb-3">Hello, <?= esc($name) ?>!</h2>
+       <h2 class="mb-3">Hello, <?= esc($username) ?>!</h2>
         <p>Your role is: <strong><?= esc($role) ?></strong></p>
 
         <?php if ($role === 'admin'): ?>
