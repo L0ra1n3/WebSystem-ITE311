@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ITE311-ESYONG</title>
+  <title>ITE311-ESYONG LMS</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
 
   <style>
@@ -53,6 +53,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
+    
     <a class="navbar-brand" href="<?= base_url('/') ?>">LMS</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
@@ -62,21 +63,24 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-
-      <!-- ✅ LEFT SIDE: Only show these when logged in -->
-      <?php if (session()->get('isLoggedIn')): ?>
+      <!-- Left side -->
       <ul class="navbar-nav position-relative">
-        <li class="nav-item"><a class="nav-link <?= url_is('/') ? 'active' : '' ?>" href="<?= base_url('/') ?>">Home</a></li>
-        <li class="nav-item"><a class="nav-link <?= url_is('about') ? 'active' : '' ?>" href="<?= base_url('about') ?>">About</a></li>
-        <li class="nav-item"><a class="nav-link <?= url_is('contact') ? 'active' : '' ?>" href="<?= base_url('contact') ?>">Contact</a></li>
+        <li class="nav-item">
+          <a class="nav-link <?= url_is('/') ? 'active' : '' ?>" href="<?= base_url('/') ?>">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?= url_is('about') ? 'active' : '' ?>" href="<?= base_url('about') ?>">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?= url_is('contact') ? 'active' : '' ?>" href="<?= base_url('contact') ?>">Contact</a>
+        </li>
         <div class="highlight-bar"></div>
       </ul>
-      <?php endif; ?>
 
-      <!-- ✅ RIGHT SIDE -->
+      <!-- Right side -->
       <ul class="navbar-nav ms-auto">
-        <?php if (session()->get('isLoggedIn')): ?>
-          <!-- Show only for logged in users -->
+        <?php if (session()->get('logged_in')): ?>
+          <!-- ✅ Show when logged in -->
           <li class="nav-item">
             <a class="nav-link <?= url_is('dashboard') ? 'active' : '' ?>" href="<?= base_url('dashboard') ?>">Dashboard</a>
           </li>
@@ -84,7 +88,7 @@
             <a class="nav-link" href="<?= base_url('logout') ?>">Logout</a>
           </li>
         <?php else: ?>
-          <!-- Show only for visitors -->
+          <!-- ✅ Show when NOT logged in -->
           <li class="nav-item">
             <a class="nav-link <?= url_is('login') ? 'active' : '' ?>" href="<?= base_url('login') ?>">Login</a>
           </li>
@@ -93,7 +97,6 @@
           </li>
         <?php endif; ?>
       </ul>
-
     </div>
   </div>
 </nav>

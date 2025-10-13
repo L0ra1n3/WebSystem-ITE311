@@ -2,69 +2,56 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
+use App\Models\CourseModel;
 use App\Models\EnrollmentModel;
 
-class Course extends Controller
+class Course extends BaseController
 {
     public function enroll()
     {
-        // Load helpers
-        helper(['form', 'url']);
-
-        // Check if the user is logged in
-        $session = session();
-        $userId = $session->get('user_id'); // dapat may 'user_id' sa session mo
-
-        if (!$userId) {
+        // ✅ Check if user is logged in
+        if (!session()->get('logged_in')) {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'User not logged in.'
-            ]);
+                'message' => 'Unauthorized. Please login first.'
+            ])->setStatusCode(401);
         }
 
-        // Get course_id from POST (AJAX)
-        $courseId = $this->request->getPost('course_id');
+        $user_id = session()->get('user_id');
+        $course_id = $this->request->getPost('course_id');
 
-        if (!$courseId) {
+        // ✅ Validate course_id
+        if (!$course_id || !is_numeric($course_id)) {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Missing course ID.'
-            ]);
+                'message' => 'Invalid course ID.'
+            ])->setStatusCode(400);
         }
 
-        // Load Enrollment model
-        $enrollModel = new \App\Models\EnrollmentModel();
+        $enrollModel = new EnrollmentModel();
 
-        // Check if the user is already enrolled
-        $existing = $enrollModel->where('user_id', $userId)
-                                ->where('course_id', $courseId)
-                                ->first();
-
-        if ($existing) {
+        // ✅ Check if already enrolled
+        if ($enrollModel->isAlreadyEnrolled($user_id, $course_id)) {
             return $this->response->setJSON([
                 'status' => 'error',
                 'message' => 'You are already enrolled in this course.'
             ]);
         }
 
-        // Insert new enrollment record
-        $data = [
-            'user_id' => $userId,
-            'course_id' => $courseId,
-            'created_at' => date('Y-m-d H:i:s')
-        ];
+        // ✅ Insert enrollment
+        $enrollModel->enrollUser([
+            'user_id' => $user_id,
+            'course_id' => $course_id,
+            'enrollment_date' => date('Y-m-d H:i:s')
+        ]);
 
-        if ($enrollModel->insert($data)) {
-            return $this->response->setJSON([
-                'status' => 'success',
-                'message' => 'Enrollment successful!'
-            ]);
-        } else {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'message' => 'Failed to enroll. Please try again.'
-            ]);
-        }
+        // ✅ Return updated enrolled courses list
+        $enrollments = $enrollModel->getUserEnrollments($user_id);
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'Successfully enrolled!',
+            'enrollments' => $enrollments
+        ]);
     }
 }

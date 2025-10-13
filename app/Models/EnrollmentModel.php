@@ -15,13 +15,16 @@ class EnrollmentModel extends Model
         return $this->insert($data);
     }
 
-    public function getUserEnrollments($user_id)
-    {
-        return $this->select('courses.*')
-                    ->join('courses', 'courses.id = enrollments.course_id')
-                    ->where('enrollments.user_id', $user_id)
-                    ->findAll();
-    }
+ public function getUserEnrollments($user_id)
+{
+     return $this->select('enrollments.*, courses.id as course_id, courses.course_code, courses.course_name')
+                ->join('courses', 'courses.id = enrollments.course_id')
+                ->where('enrollments.user_id', $user_id)
+                ->orderBy('enrollments.enrollment_date', 'DESC')
+                ->findAll();
+}
+
+
 
     public function isAlreadyEnrolled($user_id, $course_id)
     {
