@@ -35,3 +35,9 @@ $routes->get('teacher/grades', 'Teacher::grades');
 // Admin pages
 $routes->get('admin/users', 'Admin::users');
 $routes->get('admin/reports', 'Admin::reports');
+
+// Materials routes
+$routes->get('/admin/course/(:num)/upload', 'Materials::upload/$1');
+$routes->post('/admin/course/(:num)/upload', 'Materials::upload/$1');
+$routes->get('/materials/delete/(:num)', 'Materials::delete/$1');
+$routes->get('/materials/download/(:num)', 'Materials::download/$1');

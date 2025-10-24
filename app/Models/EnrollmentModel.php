@@ -32,4 +32,14 @@ class EnrollmentModel extends Model
                     ->where('course_id', $course_id)
                     ->first() !== null;
     }
+
+    public function getAllEnrollmentsWithDetails()
+    {
+        return $this->select('enrollments.*, users.username, users.email, courses.course_code, courses.course_name, courses.units')
+                    ->join('users', 'users.id = enrollments.user_id')
+                    ->join('courses', 'courses.id = enrollments.course_id')
+                    ->where('users.role', 'student')
+                    ->orderBy('enrollments.enrollment_date', 'DESC')
+                    ->findAll();
+    }
 }

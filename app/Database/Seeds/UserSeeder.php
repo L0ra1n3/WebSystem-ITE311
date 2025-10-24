@@ -6,9 +6,9 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        $passwordAdmin = password_hash('Admin123!', PASSWORD_DEFAULT);
-        $passwordTeacher = password_hash('Teacher123!', PASSWORD_DEFAULT);
-        $passwordStudent = password_hash('Student123!', PASSWORD_DEFAULT);
+        $passwordAdmin = password_hash('admin123', PASSWORD_DEFAULT);
+        $passwordTeacher = password_hash('teacher123', PASSWORD_DEFAULT);
+        $passwordStudent = password_hash('student123', PASSWORD_DEFAULT);
 
         $data = [
             [
